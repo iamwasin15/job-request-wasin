@@ -85,7 +85,7 @@ a.lnk,button.lnk{color:var(--accent);background:none;border:0;padding:0;font:inh
 </main>
 <script>
 (function(){
-var STAT=["Open","In Progress","Pending","Completed"];
+var STAT=["Pending","Completed"];
 var VEND=["Cisco","Huawei","Watchguard","TP-Link","Zyxel","Allied Telesis","HPE Aruba","Dell","Other"];
 var LEVEL=["Advance","Basic","Project"];
 var H={"ticket no":"no","service level":"level","brand":"brand","vendor":"brand","description":"desc","status":"status","latest events":"events","partner/vender":"partner","partner/vendor":"partner","enduser":"enduser","project manager":"pm","engineer":"engineer","month":"month"};
@@ -112,7 +112,7 @@ function monthOf(name){var m=/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[
 function readFile(f){return new Promise(function(res){var r=new FileReader();r.onload=function(){res({name:f.name,text:String(r.result)})};r.onerror=function(){res({name:f.name,text:""})};r.readAsText(f)})}
 function warn(m){L.warn[m]=1}
 function check(o){
-  if(!o.status)warn("มีงานที่ Status ว่าง");else if(STAT.indexOf(o.status)<0)warn("Status “"+o.status+"” ไม่อยู่ในรายการที่หน้าเว็บรู้จัก (Open / In Progress / Pending / Completed) จะแสดงเป็นสีเทา");
+  if(!o.status)warn("มีงานที่ Status ว่าง");else if(STAT.indexOf(o.status)<0)warn("Status “"+o.status+"” ไม่อยู่ในรายการที่หน้าเว็บรู้จัก (Pending / Completed) จะแสดงเป็นสีเทา");
   if(o.brand&&VEND.indexOf(o.brand)<0)warn("Vendor “"+o.brand+"” ไม่อยู่ในรายการที่หน้าเว็บรู้จัก จะแสดงสีเทา (สะกดให้ตรง เช่น HPE Aruba, TP-Link)");
   if(o.level&&LEVEL.indexOf(o.level)<0)warn("Service Level “"+o.level+"” ไม่อยู่ในรายการที่รู้จัก (Advance / Basic / Project)");
   if(!o.month)warn("มีงานที่ไม่ระบุเดือน (ชื่อไฟล์ไม่มีเดือน เช่น Jan-2026) จะไม่ขึ้นในกราฟ Month");
