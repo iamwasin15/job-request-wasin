@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Job Request · อัปเดตข้อมูล</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#10213f;--mute:#63728a;--line:#dde4ee;--accent:#2347e6;--navy:#0d1b3e;--ok:#1f9d6b;--warn:#e8731a;--bad:#d33a30}
+@media (prefers-color-scheme:dark){:root{--bg:#0a1120;--card:#141e35;--ink:#e8edf7;--mute:#92a0b8;--line:#25324f;--accent:#7b93ff;--navy:#0a1226}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 "IBM Plex Sans Thai",system-ui,"Segoe UI",sans-serif;padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.hero{background:var(--navy);color:#fff;padding:26px 0 22px;padding-top:calc(26px + env(safe-area-inset-top,0px))}
+h1{font-size:clamp(26px,5vw,36px);font-weight:700;margin:0;letter-spacing:-.02em}
+.sub{color:#aebbd6;margin:4px 0 0}
+.sub.bad{color:#ffb4ae;font-weight:600}
+main.wrap{padding-top:20px;padding-bottom:70px;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 1px 2px rgba(16,33,63,.06)}
+.card h2{margin:0 0 6px;font-size:17px;font-weight:600}
+.card p{margin:0 0 12px;color:var(--mute)}
+.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 18px;cursor:pointer}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input[type=text]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 11px;width:100%;max-width:280px}
+.row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.stat{border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:10px 14px}
+.stat b{display:block;font-size:26px;line-height:1.15}.stat span{color:var(--mute);font-size:13px}
+.msg{padding:10px 14px;border-radius:10px;margin:8px 0;font-size:14px}
+.msg.bad{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad);font-weight:500}
+.msg.warn{background:color-mix(in srgb,var(--warn) 13%,transparent)}
+.msg.ok{background:color-mix(in srgb,var(--ok) 13%,transparent)}
+ul.lst{margin:6px 0 0;padding-left:20px;font-size:14px}ul.lst li{margin:2px 0}
+.mono{font-weight:600}.from{color:var(--mute);text-decoration:line-through}
+.steps{margin:0;padding-left:20px}.steps li{margin:3px 0}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:10px 0;font-size:14px}
+.chk input{margin-top:5px}
+a.lnk,button.lnk{color:var(--accent);background:none;border:0;padding:0;font:inherit;text-decoration:underline;cursor:pointer}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap"><h1>อัปเดตข้อมูล</h1><p class="sub" id="sub">กำลังโหลดข้อมูลเดิม…</p></div></header>
+<main class="wrap">
+  <section class="card">
+    <h2>วิธีใช้</h2>
+    <ol class="steps">
+      <li>เลือกไฟล์ CSV ที่ส่งออกจาก Excel (เลือกหลายไฟล์พร้อมกันได้ ชื่อไฟล์ควรมีเดือน เช่น <b>All-Work-2026(Nov-2026).csv</b>)</li>
+      <li>ตรวจสรุปด้านล่างว่าเพิ่ม/เปลี่ยนตรงกับที่คาดไหน</li>
+      <li>กด “ดาวน์โหลด data.js”</li>
+      <li>ไปที่ GitHub แล้วอัปโหลด <b>data.js</b> ทับไฟล์เดิม (ไฟล์เดียวพอ) รอ 1-2 นาทีแล้วเปิดหน้าเว็บตรวจ</li>
+    </ol>
+    <p style="margin:10px 0 0">หน้านี้ยังไม่แก้เว็บจริงจนกว่าคุณจะอัปโหลดไฟล์ขึ้น GitHub</p>
+  </section>
+  <section class="card">
+    <h2>1. เลือกไฟล์ CSV</h2>
+    <p>Ticket No ที่มีอยู่แล้วจะถูกอัปเดต ส่วน Ticket No ใหม่จะถูกเพิ่ม คอลัมน์ Phone และ Contract จะไม่ถูกเก็บ</p>
+    <div class="row2"><button class="btn pri" id="pick">เลือกไฟล์ CSV</button><button class="btn" id="reset">ล้างที่เลือกไว้</button></div>
+    <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
+    <div id="files"></div>
+  </section>
+  <section class="card">
+    <h2>2. ตรวจสรุป</h2>
+    <div id="sum"></div>
+  </section>
+  <section class="card">
+    <h2>3. ดาวน์โหลด</h2>
+    <p id="dlhint"></p>
+    <label class="chk" id="emptyrow" style="display:none"><input type="checkbox" id="empty"><span>โหลดข้อมูลเดิมไม่ได้ และฉันเข้าใจว่า data.js ใหม่จะมีเฉพาะข้อมูลที่เลือกไว้ <b>ข้อมูลเก่าที่เผยแพร่อยู่จะหายหลังอัปโหลด</b></span></label>
+    <div class="row2"><button class="btn pri" id="dl" disabled>ดาวน์โหลด data.js</button></div>
+    <div id="dlmsg"></div>
+  </section>
+  <section class="card">
+    <h2>ลบงาน (ถ้าจำเป็น)</h2>
+    <p>ลบออกจากไฟล์ใหม่ที่กำลังจะดาวน์โหลด ยังไม่มีผลกับเว็บจริงจนกว่าจะอัปโหลด</p>
+    <div class="row2"><input type="text" id="delno" placeholder="Ticket No เช่น TS260900284" aria-label="Ticket No ที่จะลบ"><button class="btn" id="delbtn">ลบงานนี้</button></div>
+  </section>
+  <section class="card" id="manual" style="display:none">
+    <h2>โหลดข้อมูลเดิมจากเครื่อง</h2>
+    <p>ถ้าเปิดหน้านี้จากไฟล์ในเครื่อง หรือระบบโหลดไม่ได้ ให้เลือกไฟล์ data.js ที่เคยดาวน์โหลดหรือโหลดมาจากเว็บ</p>
+    <input type="file" id="basefile" accept=".js,text/javascript" aria-label="เลือก data.js เดิม">
+  </section>
+</main>
+<script>
+(function(){
+var STAT=["Open","In Progress","Pending","Completed"];
+var VEND=["Cisco","Huawei","Watchguard","TP-Link","Zyxel","Allied Telesis","HPE Aruba","Dell","Other"];
+var LEVEL=["Advance","Basic","Project"];
+var H={"ticket no":"no","service level":"level","brand":"brand","vendor":"brand","description":"desc","status":"status","latest events":"events","partner/vender":"partner","partner/vendor":"partner","enduser":"enduser","project manager":"pm","engineer":"engineer","month":"month"};
+var KEYS=["level","brand","desc","status","events","partner","enduser","pm","engineer","month"];
+var LBL={level:"Service Level",brand:"Vendor",desc:"Description",status:"Status",events:"Latest Events",partner:"Partner",enduser:"EndUser",pm:"Project Manager",engineer:"Engineer",month:"Month"};
+var BASE=[],baseOk=false,baseUpdated=0,loadFailed=false,W=[],L=null,downloaded=false;
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function copy(a){return a.map(function(t){var c={};Object.keys(t).forEach(function(k){c[k]=t[k]});return c})}
+function resetLog(){L={added:[],changed:[],same:0,removed:[],bad:[],warn:{},files:[]};downloaded=false}
+function setBase(d){var ok=!!(d&&d.tickets&&d.tickets.length>=0&&Array.isArray(d.tickets));BASE=ok?d.tickets:[];baseUpdated=ok?(d.updated||0):0;baseOk=ok;loadFailed=!ok;W=copy(BASE);resetLog();render()}
+function parseCSV(s){
+  var r=[],row=[],c="",q=false,i,ch;s=s.replace(/^﻿/,"");
+  for(i=0;i<s.length;i++){ch=s[i];
+    if(q){if(ch==='"'){if(s[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
+    else if(ch==='"')q=true;
+    else if(ch===","){row.push(c);c=""}
+    else if(ch==="\n"||ch==="\r"){if(ch==="\r"&&s[i+1]==="\n")i++;row.push(c);r.push(row);row=[];c=""}
+    else c+=ch}
+  if(c||row.length){row.push(c);r.push(row)}
+  return r;
+}
+function monthOf(name){var m=/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[^a-z0-9]*(\d{4})/i.exec(name);return m?m[1][0].toUpperCase()+m[1].slice(1).toLowerCase()+"-"+m[2]:""}
+function readFile(f){return new Promise(function(res){var r=new FileReader();r.onload=function(){res({name:f.name,text:String(r.result)})};r.onerror=function(){res({name:f.name,text:""})};r.readAsText(f)})}
+function warn(m){L.warn[m]=1}
+function check(o){
+  if(!o.status)warn("มีงานที่ Status ว่าง");else if(STAT.indexOf(o.status)<0)warn("Status “"+o.status+"” ไม่อยู่ในรายการที่หน้าเว็บรู้จัก (Open / In Progress / Pending / Completed) จะแสดงเป็นสีเทา");
+  if(o.brand&&VEND.indexOf(o.brand)<0)warn("Vendor “"+o.brand+"” ไม่อยู่ในรายการที่หน้าเว็บรู้จัก จะแสดงสีเทา (สะกดให้ตรง เช่น HPE Aruba, TP-Link)");
+  if(o.level&&LEVEL.indexOf(o.level)<0)warn("Service Level “"+o.level+"” ไม่อยู่ในรายการที่รู้จัก (Advance / Basic / Project)");
+  if(!o.month)warn("มีงานที่ไม่ระบุเดือน (ชื่อไฟล์ไม่มีเดือน เช่น Jan-2026) จะไม่ขึ้นในกราฟ Month");
+}
+function apply(list){
+  var byNo={},base=Date.now();W.forEach(function(t){byNo[t.no]=t});
+  list.forEach(function(x,fi){
+    var rows=parseCSV(x.text),mo=monthOf(x.name);
+    var map=rows.length?rows[0].map(function(h){return H[h.trim().toLowerCase()]||null}):[];
+    if(rows.length<2||map.indexOf("no")<0){L.bad.push(x.name);return}
+    var seen={},n=0;
+    rows.slice(1).forEach(function(r,i){
+      var o={};map.forEach(function(k,j){if(k)o[k]=(r[j]||"").trim()});
+      if(!o.no)return;
+      if(seen[o.no])warn("Ticket "+o.no+" ซ้ำในไฟล์ "+x.name+" (ใช้แถวหลังสุด)");
+      seen[o.no]=1;
+      if(!o.month&&mo)o.month=mo;
+      var ex=byNo[o.no];
+      if(ex){
+        var d=[];
+        KEYS.forEach(function(k){if(!(k in o))return;var nv=o[k];if(k==="month"&&!nv)return;if((ex[k]||"")!==nv){d.push({k:k,from:ex[k]||"",to:nv});ex[k]=nv}});
+        check(ex);
+        if(d.length)L.changed.push({no:o.no,d:d});else L.same++;
+      }else{
+        check(o);
+        o.id="t"+base.toString(36)+fi+"x"+i+Math.random().toString(36).slice(2,5);o.created=base+fi*100000-i;
+        W.push(o);byNo[o.no]=o;L.added.push(o);
+      }
+      n++;
+    });
+    L.files.push({name:x.name,rows:n,month:mo});
+  });
+  downloaded=false;render();
+}
+function dirty(){return L.added.length+L.changed.length+L.removed.length}
+function render(){
+  var when=baseUpdated?new Date(baseUpdated).toLocaleString("th-TH-u-ca-gregory",{dateStyle:"medium",timeStyle:"short"}):"";
+  var sub=$("sub");
+  if(baseOk){sub.className="sub";sub.textContent="ข้อมูลที่เผยแพร่อยู่ "+BASE.length+" งาน · ข้อมูล ณ "+when}
+  else if(loadFailed){sub.className="sub bad";sub.textContent="โหลดข้อมูลเดิม (data.js) ไม่สำเร็จ — อย่าดาวน์โหลดไฟล์ใหม่ก่อนโหลดข้อมูลเดิม"}
+  $("manual").style.display=baseOk?"none":"";
+  $("emptyrow").style.display=baseOk?"none":"";
+  $("files").innerHTML=L.files.map(function(f){return'<div class="msg ok">'+esc(f.name)+" — "+f.rows+" แถว"+(f.month?" · เดือน "+esc(f.month):" · ไม่พบเดือนในชื่อไฟล์")+"</div>"}).join("")+L.bad.map(function(n){return'<div class="msg bad">'+esc(n)+" — อ่านไม่ได้ (ไม่พบคอลัมน์ Ticket No)</div>"}).join("");
+  var h='<div class="stats">'
+   +'<div class="stat" style="--c:var(--ok)"><b>'+L.added.length+'</b><span>เพิ่มใหม่</span></div>'
+   +'<div class="stat" style="--c:var(--accent)"><b>'+L.changed.length+'</b><span>เปลี่ยนแปลง</span></div>'
+   +'<div class="stat" style="--c:var(--mute)"><b>'+L.same+'</b><span>ไม่เปลี่ยน</span></div>'
+   +'<div class="stat" style="--c:var(--bad)"><b>'+L.removed.length+'</b><span>ลบ</span></div>'
+   +'<div class="stat" style="--c:var(--ink)"><b>'+W.length+'</b><span>รวมหลังอัปเดต</span></div></div>';
+  Object.keys(L.warn).forEach(function(m){h+='<div class="msg warn">'+esc(m)+"</div>"});
+  if(L.added.length){h+="<div><b>งานที่เพิ่มใหม่</b></div><ul class=\"lst\">"+L.added.slice(0,40).map(function(t){return'<li><span class="mono">'+esc(t.no)+"</span> · "+esc(t.brand)+" · "+esc(t.status)+" · "+esc((t.desc||"").slice(0,70))+"</li>"}).join("")+"</ul>"+(L.added.length>40?"<p>…และอีก "+(L.added.length-40)+" งาน</p>":"")}
+  if(L.changed.length){h+="<div style=\"margin-top:10px\"><b>งานที่เปลี่ยนแปลง</b></div><ul class=\"lst\">"+L.changed.slice(0,40).map(function(c){return'<li><span class="mono">'+esc(c.no)+"</span> — "+c.d.map(function(x){return esc(LBL[x.k])+": <span class=\"from\">"+esc((x.from||"-").slice(0,40))+"</span> → "+esc((x.to||"-").slice(0,40))}).join(" · ")+"</li>"}).join("")+"</ul>"+(L.changed.length>40?"<p>…และอีก "+(L.changed.length-40)+" งาน</p>":"")}
+  if(L.removed.length)h+="<div style=\"margin-top:10px\"><b>งานที่ลบ</b>: "+L.removed.map(esc).join(", ")+"</div>";
+  if(!dirty()&&!L.files.length&&!L.bad.length)h='<p>ยังไม่ได้เลือกไฟล์</p>';
+  else if(!dirty()&&!L.bad.length)h+='<p>ไม่มีอะไรเปลี่ยน ไม่ต้องอัปโหลดไฟล์ใหม่</p>';
+  $("sum").innerHTML=h;
+  var canDl=dirty()>0&&(baseOk||$("empty").checked);
+  $("dl").disabled=!canDl;
+  $("dlhint").textContent=!dirty()?"ยังไม่มีการเปลี่ยนแปลงให้ดาวน์โหลด":(!baseOk&&!$("empty").checked?"โหลดข้อมูลเดิมก่อน หรือติ๊กยืนยันด้านล่าง":"พร้อมดาวน์โหลด data.js ("+W.length+" งาน)");
+  $("dlmsg").innerHTML=downloaded?'<div class="msg ok">ดาวน์โหลดแล้ว ขั้นต่อไป: อัปโหลด <b>data.js</b> ทับไฟล์เดิมบน GitHub แล้วรอ 1-2 นาที</div>':"";
+}
+$("pick").addEventListener("click",function(){$("file").click()});
+$("file").addEventListener("change",function(){var fl=Array.prototype.slice.call(this.files);this.value="";if(fl.length)Promise.all(fl.map(readFile)).then(apply)});
+$("reset").addEventListener("click",function(){W=copy(BASE);resetLog();render()});
+$("empty").addEventListener("change",render);
+$("dl").addEventListener("click",function(){
+  if($("dl").disabled)return;
+  var out={updated:Date.now(),tickets:W};
+  var blob=new Blob(["window.JOB_DATA="+JSON.stringify(out)+";\n"],{type:"text/javascript"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="data.js";document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);
+  downloaded=true;render();
+});
+$("delbtn").addEventListener("click",function(){
+  var no=$("delno").value.trim();if(!no)return;
+  var i=-1;W.forEach(function(t,j){if(t.no===no)i=j});
+  if(i<0){alert("ไม่พบ Ticket No นี้: "+no);return}
+  if(!confirm("ลบ "+no+" ออกจากไฟล์ใหม่?"))return;
+  W.splice(i,1);L.removed.push(no);$("delno").value="";downloaded=false;render();
+});
+$("basefile").addEventListener("change",function(){
+  var f=this.files[0];this.value="";if(!f)return;
+  readFile(f).then(function(x){
+    try{var j=x.text.replace(/^﻿/,"").replace(/^\s*window\.JOB_DATA\s*=\s*/,"").replace(/;\s*$/,"");var d=JSON.parse(j);if(!d||!Array.isArray(d.tickets))throw 0;setBase(d)}
+    catch(e){alert("อ่านไฟล์นี้ไม่ได้ ต้องเป็นไฟล์ data.js ที่ได้จากระบบนี้")}
+  });
+});
+resetLog();render();
+var sc=document.createElement("script");sc.src="data.js?_="+Date.now();
+sc.onload=function(){setBase(window.JOB_DATA)};
+sc.onerror=function(){setBase(null)};
+document.head.appendChild(sc);
+})();
+</script>
+</body>
+</html>
