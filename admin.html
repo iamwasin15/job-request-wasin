@@ -56,7 +56,7 @@ a.lnk,button.lnk{color:var(--accent);background:none;border:0;padding:0;font:inh
   </section>
   <section class="card">
     <h2>1. เลือกไฟล์ CSV</h2>
-    <p>Ticket No ที่มีอยู่แล้วจะถูกอัปเดต ส่วน Ticket No ใหม่จะถูกเพิ่ม คอลัมน์ Phone และ Contract จะไม่ถูกเก็บ</p>
+    <p>Ticket No ที่มีอยู่แล้วจะถูกอัปเดต ส่วน Ticket No ใหม่จะถูกเพิ่ม ระบบเก็บเฉพาะ Ticket No, Service Level, Vendor, Status และเดือน ส่วน Description, Latest Events, EndUser, Partner, PM, Engineer, Phone, Contract จะ<b>ไม่ถูกเก็บ</b>ในไฟล์ที่เผยแพร่</p>
     <div class="row2"><button class="btn pri" id="pick">เลือกไฟล์ CSV</button><button class="btn" id="reset">ล้างที่เลือกไว้</button></div>
     <input type="file" id="file" accept=".csv,text/csv" multiple hidden>
     <div id="files"></div>
@@ -89,7 +89,8 @@ var STAT=["Pending","Completed"];
 var VEND=["Cisco","Huawei","Watchguard","TP-Link","Zyxel","Allied Telesis","HPE Aruba","Dell","Other"];
 var LEVEL=["Advance","Basic","Project"];
 var H={"ticket no":"no","service level":"level","brand":"brand","vendor":"brand","description":"desc","status":"status","latest events":"events","partner/vender":"partner","partner/vendor":"partner","enduser":"enduser","project manager":"pm","engineer":"engineer","month":"month"};
-var KEYS=["level","brand","desc","status","events","partner","enduser","pm","engineer","month"];
+var KEYS=["level","brand","status","month"];
+var PUB=["id","no","level","brand","status","month","created"];
 var LBL={level:"Service Level",brand:"Vendor",desc:"Description",status:"Status",events:"Latest Events",partner:"Partner",enduser:"EndUser",pm:"Project Manager",engineer:"Engineer",month:"Month"};
 var BASE=[],baseOk=false,baseUpdated=0,loadFailed=false,W=[],L=null,downloaded=false;
 function $(i){return document.getElementById(i)}
@@ -163,7 +164,7 @@ function render(){
    +'<div class="stat" style="--c:var(--bad)"><b>'+L.removed.length+'</b><span>ลบ</span></div>'
    +'<div class="stat" style="--c:var(--ink)"><b>'+W.length+'</b><span>รวมหลังอัปเดต</span></div></div>';
   Object.keys(L.warn).forEach(function(m){h+='<div class="msg warn">'+esc(m)+"</div>"});
-  if(L.added.length){h+="<div><b>งานที่เพิ่มใหม่</b></div><ul class=\"lst\">"+L.added.slice(0,40).map(function(t){return'<li><span class="mono">'+esc(t.no)+"</span> · "+esc(t.brand)+" · "+esc(t.status)+" · "+esc((t.desc||"").slice(0,70))+"</li>"}).join("")+"</ul>"+(L.added.length>40?"<p>…และอีก "+(L.added.length-40)+" งาน</p>":"")}
+  if(L.added.length){h+="<div><b>งานที่เพิ่มใหม่</b></div><ul class=\"lst\">"+L.added.slice(0,40).map(function(t){return'<li><span class="mono">'+esc(t.no)+"</span> · "+esc(t.brand||"-")+" · "+esc(t.level||"-")+" · "+esc(t.status||"-")+" · "+esc(t.month||"-")+"</li>"}).join("")+"</ul>"+(L.added.length>40?"<p>…และอีก "+(L.added.length-40)+" งาน</p>":"")}
   if(L.changed.length){h+="<div style=\"margin-top:10px\"><b>งานที่เปลี่ยนแปลง</b></div><ul class=\"lst\">"+L.changed.slice(0,40).map(function(c){return'<li><span class="mono">'+esc(c.no)+"</span> — "+c.d.map(function(x){return esc(LBL[x.k])+": <span class=\"from\">"+esc((x.from||"-").slice(0,40))+"</span> → "+esc((x.to||"-").slice(0,40))}).join(" · ")+"</li>"}).join("")+"</ul>"+(L.changed.length>40?"<p>…และอีก "+(L.changed.length-40)+" งาน</p>":"")}
   if(L.removed.length)h+="<div style=\"margin-top:10px\"><b>งานที่ลบ</b>: "+L.removed.map(esc).join(", ")+"</div>";
   if(!dirty()&&!L.files.length&&!L.bad.length)h='<p>ยังไม่ได้เลือกไฟล์</p>';
@@ -180,7 +181,7 @@ $("reset").addEventListener("click",function(){W=copy(BASE);resetLog();render()}
 $("empty").addEventListener("change",render);
 $("dl").addEventListener("click",function(){
   if($("dl").disabled)return;
-  var out={updated:Date.now(),tickets:W};
+  var out={updated:Date.now(),tickets:W.map(function(t){var c={};PUB.forEach(function(k){if(t[k]!=null&&t[k]!=="")c[k]=t[k]});return c})};
   var blob=new Blob(["window.JOB_DATA="+JSON.stringify(out)+";\n"],{type:"text/javascript"});
   var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="data.js";document.body.appendChild(a);a.click();
   setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500);

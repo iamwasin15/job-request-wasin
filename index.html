@@ -36,9 +36,9 @@ h1{margin:0;font:700 clamp(1.7rem,2.4vw,2.3rem)/1.1 var(--f-display);letter-spac
 
 /* hero */
 .hero{display:grid;grid-template-columns:minmax(15rem,.62fr) minmax(0,1.5fr);margin-bottom:1.5rem;overflow:hidden}
-.hero.warn .attn{background:color-mix(in srgb,var(--pend) var(--tint),var(--panel))}
+.hero .attn{background:color-mix(in srgb,var(--done) var(--tint),var(--panel))}
 .attn{padding:1.7rem 2rem 1.6rem;border-right:1px solid var(--line);display:flex;flex-direction:column}
-.big{font:700 clamp(6rem,11.5vw,12rem)/.86 var(--f-display);color:var(--attn);letter-spacing:-.02em;margin:.3rem 0 .9rem;font-variant-numeric:tabular-nums}
+.big{font:700 clamp(6rem,11.5vw,12rem)/.86 var(--f-display);color:var(--done);letter-spacing:-.02em;margin:.3rem 0 .9rem;font-variant-numeric:tabular-nums}
 .big.ok{color:var(--done)}
 .lead{margin:auto 0 0;color:var(--mute);font-size:1.05rem}
 .stat{padding:1.7rem 2rem 1.6rem}
@@ -57,35 +57,6 @@ h1{margin:0;font:700 clamp(1.7rem,2.4vw,2.3rem)/1.1 var(--f-display);letter-spac
 .srow .sp{color:var(--mute);font-size:.9rem;text-align:right}
 .srow.zero .sc,.srow.zero .sn{color:var(--mute);font-weight:400}.srow.zero .dot{opacity:.45}
 
-/* case list */
-.list{display:grid;gap:.75rem;margin-bottom:1.6rem}
-.row{position:relative;display:grid;grid-template-columns:11rem minmax(0,1fr) 15.5rem;gap:.35rem 1.8rem;align-items:start;width:100%;text-align:left;cursor:pointer;
-  background:var(--panel);border:1px solid var(--line);border-radius:.9rem;padding:1.15rem 1.5rem 1.15rem 1.9rem}
-.row::before{content:"";position:absolute;left:0;top:.95rem;bottom:.95rem;width:5px;border-radius:0 5px 5px 0;background:var(--sc)}
-.row.pending{background:color-mix(in srgb,var(--pend) var(--tint),var(--panel));border-color:color-mix(in srgb,var(--pend) 50%,var(--line))}
-.row:hover{border-color:var(--mute)}
-.c1{display:grid;gap:.5rem;justify-items:start;align-content:start}
-.meta{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem .8rem}
-.meta .mo{color:var(--mute);font-size:.9rem}
-.tno{font:700 1.3rem/1.1 var(--f-display);letter-spacing:.01em}
-.vd{display:inline-flex;align-items:center;gap:.5rem;font-weight:500}
-.vd i{width:.7rem;height:.7rem;border-radius:3px;background:var(--vc)}
-.lvl{font-style:normal;font-size:.82rem;font-weight:600;padding:.02rem .7rem;border-radius:999px;color:#fff;background:var(--lc)}
-.lvl.basic{color:#3a2900}
-.c2{display:grid;gap:.4rem;min-width:0}
-.ds{font-size:1.2rem;font-weight:600;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.ev.none2{opacity:.65}
-.ev{color:var(--mute);font-size:1rem;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.c3{display:grid;gap:.35rem;justify-items:end;text-align:right;min-width:0}
-.pill{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;padding:.2rem .95rem .2rem .8rem;border-radius:999px;color:color-mix(in srgb,var(--c) 72%,var(--ink));background:color-mix(in srgb,var(--c) 17%,transparent)}
-.led{width:.62rem;height:.62rem;border-radius:50%;background:var(--c);animation:pulse 2.6s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 60%,transparent)}70%,100%{box-shadow:0 0 0 .6rem transparent}}
-.eng{font-weight:500;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.par,.mo{color:var(--mute);font-size:.9rem;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.none{padding:2.2rem 1rem;text-align:center;color:var(--mute);background:var(--panel);border:1px dashed var(--line);border-radius:.9rem}
-.none b{display:block;color:var(--ink);font-size:1.25rem;margin-bottom:.2rem}
-.hint{margin:.1rem .2rem 0;color:var(--mute);font-size:.95rem}
-
 /* month + vendor */
 .duo{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.5rem}
 .duo .panel{padding:1.5rem 1.8rem 1.4rem;display:flex;flex-direction:column}
@@ -93,10 +64,9 @@ h1{margin:0;font:700 clamp(1.7rem,2.4vw,2.3rem)/1.1 var(--f-display);letter-spac
 .mcol{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:.4rem}
 .mnum{font:600 1rem/1 var(--f-display);font-variant-numeric:tabular-nums}
 .stack{display:flex;flex-direction:column-reverse;gap:2px;width:100%;max-width:2.8rem}
-.seg{display:block;height:.62rem;width:100%;padding:0;border:0;border-radius:2px;background:var(--c);cursor:pointer}
+.seg{display:block;height:.62rem;width:100%;border-radius:2px;background:var(--c)}
 .seg.dn{background:color-mix(in srgb,var(--c) 58%,var(--inset))}
 .seg.on{box-shadow:0 0 .55rem color-mix(in srgb,var(--c) 75%,transparent)}
-.seg:hover{outline:2px solid var(--ink);outline-offset:1px}
 .mlab{color:var(--mute);font-size:.9rem}
 .key{margin:1rem 0 0;color:var(--mute);font-size:.9rem}
 .vend{display:grid;gap:.1rem;flex:1;align-content:space-evenly}
@@ -107,27 +77,12 @@ h1{margin:0;font:700 clamp(1.7rem,2.4vw,2.3rem)/1.1 var(--f-display);letter-spac
 .vnum{font:700 1.2rem/1 var(--f-display);text-align:right;font-variant-numeric:tabular-nums}
 .mute{color:var(--mute)}
 
-/* detail drawer */
-#veil{position:fixed;inset:0;background:rgba(5,10,20,.55);display:none}
-#drawer{position:fixed;top:0;right:0;bottom:0;width:min(34rem,100%);background:var(--panel);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .22s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
-body.open #drawer{transform:none}body.open #veil{display:block}
-#drawer h2{margin:0;font:700 1.5rem var(--f-display);padding:1.3rem 1.5rem .6rem}
-#detail{margin:0;padding:.6rem 1.5rem 1rem;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;flex:1;align-content:start}
-#detail dt{font-size:.88rem;color:var(--mute)}#detail dd{margin:0;white-space:pre-wrap;word-break:break-word}
-#detail .full{grid-column:1/-1}
-.acts{padding:.9rem 1.5rem calc(1rem + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
-.btn{background:var(--panel);border:1px solid var(--line);border-radius:.7rem;padding:.55rem 1.3rem;cursor:pointer}
-
 @media (max-width:1000px){
   .hero,.duo{grid-template-columns:1fr}
   .attn{border-right:0;border-bottom:1px solid var(--line)}
-  .row{grid-template-columns:1fr}
-  .c1{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .9rem}
-  .c3{justify-items:start;text-align:left}
-  #detail{grid-template-columns:1fr}
 }
 @media (max-width:520px){.srow{grid-template-columns:.8rem 6.2rem minmax(1.5rem,1fr) 3rem 2.3rem;gap:.55rem}.shell{padding-inline:1rem}.attn,.stat{padding:1.3rem 1.2rem}.statbody{gap:1.2rem}.duo .panel{padding:1.2rem 1.1rem}.vrow{grid-template-columns:6.6rem minmax(0,1fr) 2.2rem}}
-@media (prefers-reduced-motion:reduce){.led{animation:none}#drawer{transition:none}}
+@media (prefers-reduced-motion:reduce){.led{animation:none}}
 </style>
 </head>
 <body>
@@ -140,32 +95,19 @@ body.open #drawer{transform:none}body.open #veil{display:block}
       <div class="attn" id="attn"></div>
       <div class="stat" id="stat"></div>
     </section>
-    <section aria-label="เคสที่ต้องติดตาม">
-      <h2 class="sec">ต้องติดตาม</h2>
-      <div class="list" id="list"></div>
-    </section>
     <section class="duo">
       <div class="panel"><h2 class="sec">Month</h2><div class="meters" id="months"></div><p class="key" id="mkey"></p></div>
       <div class="panel"><h2 class="sec">Vendor</h2><div class="vend" id="brands"></div></div>
     </section>
   </main>
 </div>
-<div id="veil"></div>
-<aside id="drawer" aria-label="รายละเอียดงาน" aria-hidden="true">
-  <h2 id="dt"></h2>
-  <dl id="detail"></dl>
-  <div class="acts"><button class="btn" id="cancel" type="button">ปิด</button></div>
-</aside>
 <script>
 (function(){
-var KEY="jobrequest:monitor:v1";
 var STAT=["Pending","Completed"];
 var SC={"Pending":"var(--pend)","Completed":"var(--done)"};
 var VC={"watchguard":"#e5483d","cisco":"#1ba1e2","huawei":"#4cae4f","tp-link":"#14b8a6","zyxel":"#8b7cf6","allied telesis":"#d9467f","hpe aruba":"#f08a24","dell":"#6f8fb8","other":"#8693ad"};
 var LC={"Advance":"#2f6fe4","Basic":"#e0a100","Project":"#2e9b4f"};
 var MN="JanFebMarAprMayJunJulAugSepOctNovDec";
-var FIELDS=[["level","Service Level"],["brand","Vendor"],["status","Status"],["month","Month"],["engineer","Engineer"],["pm","Project Manager"],["partner","Partner/Vender"],["enduser","EndUser"],["desc","Description"],["events","Latest Events"]];
-var H={"ticket no":"no","service level":"level","brand":"brand","vendor":"brand","description":"desc","status":"status","latest events":"events","partner/vender":"partner","partner/vendor":"partner","enduser":"enduser","project manager":"pm","engineer":"engineer","month":"month"};
 var DATA=null,loadErr=false,T=[],updated=0;
 function $(i){return document.getElementById(i)}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
@@ -174,16 +116,8 @@ function scol(s){return SC[s]||"var(--mute)"}
 function vcol(b){return VC[String(b||"").toLowerCase()]||"#8693ad"}
 function so(s){var i=STAT.indexOf(s);return i<0?9:i}
 function load(){
-  var base=(DATA&&DATA.tickets)||[],bu=(DATA&&DATA.updated)||0,loc=null,by={};
-  T=base.map(function(t){var c={};Object.keys(t).forEach(function(k){c[k]=t[k]});return c});updated=bu;
-  T.forEach(function(t){by[t.no]=t});
-  try{loc=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){loc=null}
-  if(loc&&loc.updated>bu&&loc.tickets){
-    loc.tickets.forEach(function(l){var ex=by[l.no];if(ex){Object.keys(l).forEach(function(k){if(k!=="id")ex[k]=l[k]})}else{T.push(l);by[l.no]=l}});
-    updated=loc.updated;
-  }
+  T=((DATA&&DATA.tickets)||[]).slice();updated=(DATA&&DATA.updated)||0;
 }
-function save(){try{localStorage.setItem(KEY,JSON.stringify({tickets:T,updated:updated}))}catch(e){alert("บันทึกข้อมูลในเบราว์เซอร์ไม่สำเร็จ (พื้นที่เต็มหรือถูกบล็อก)")}}
 function tally(key){var m={};T.forEach(function(t){var v=t[key];if(v)m[v]=(m[v]||0)+1});return m}
 function ring(cnt,n){
   var R=78,C=2*Math.PI*R,off=0,segs="";
@@ -191,82 +125,27 @@ function ring(cnt,n){
     segs+='<circle cx="100" cy="100" r="'+R+'" fill="none" stroke-width="17" style="stroke:'+scol(s)+'" stroke-dasharray="'+vis.toFixed(2)+" "+(C-vis).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'"/>';off+=len})}
   return'<svg viewBox="0 0 200 200" role="img" aria-label="สัดส่วนสถานะงาน"><circle cx="100" cy="100" r="'+R+'" fill="none" stroke-width="17" style="stroke:var(--inset)"/>'+segs+"</svg>";
 }
-function rowHtml(t){
-  var pend=t.status==="Pending",lc=LC[t.level]||"#8693ad";
-  return'<button class="row'+(pend?" pending":"")+'" data-id="'+esc(t.id)+'" style="--sc:'+scol(t.status)+';--vc:'+vcol(t.brand)+'">'
-   +'<span class="c1"><b class="tno">'+esc(t.no)+'</b><span class="meta"><span class="vd"><i></i>'+esc(t.brand||"-")+'</span><em class="lvl'+(t.level==="Basic"?" basic":"")+'" style="--lc:'+lc+'">'+esc(t.level||"-")+"</em>"+(t.month?'<span class="mo">'+esc(t.month)+"</span>":"")+"</span></span>"
-   +'<span class="c2"><span class="ds">'+esc(t.desc)+'</span><span class="ev'+(t.events?"":" none2")+'">'+(t.events?esc(t.events):"ยังไม่มีบันทึกล่าสุด")+"</span></span>"
-   +'<span class="c3"><span class="pill" style="--c:'+scol(t.status)+'"><i class="led"></i>'+esc(t.status||"-")+'</span><span class="eng">'+esc(t.engineer||"-")+"</span>"+(t.partner&&t.partner!=="-"?'<span class="par">'+esc(t.partner)+"</span>":"")+"</span></button>";
-}
 function render(){
   var n=T.length,cnt={},known=0;
   STAT.forEach(function(s){cnt[s]=0});T.forEach(function(t){if(cnt[t.status]!=null){cnt[t.status]++;known++}});
-  var act=T.filter(function(t){return t.status!=="Completed"}).sort(function(a,b){return so(a.status)-so(b.status)||(b.created||0)-(a.created||0)});
-  var an=act.length,dp=n?Math.round(cnt.Completed*100/n):0,other=n-known;
+  var dp=n?Math.round(cnt.Completed*100/n):0,other=n-known,pn=cnt.Pending;
+  var yrs={};T.forEach(function(t){var m=/(\d{4})$/.exec(t.month||"");if(m)yrs[m[1]]=1});
+  var yr=Object.keys(yrs).sort().join("–");
   var when=updated?new Date(updated).toLocaleString("th-TH-u-ca-gregory",{dateStyle:"medium",timeStyle:"short"}):"";
-  $("sub").textContent=loadErr?"โหลดไฟล์ data.js ไม่สำเร็จ ตรวจว่าอัปโหลด data.js ไว้โฟลเดอร์เดียวกับ index.html แล้ว":(n?n+" งาน · ข้อมูล ณ "+when:"ยังไม่มีข้อมูล");
-  $("hero").classList.toggle("warn",an>0);
-  $("attn").innerHTML='<h2 class="sec">เคสค้าง</h2><div class="big'+(an||!n?"":" ok")+'">'+an+'</div><p class="lead">'+(!n?"ยังไม่มีข้อมูลงาน":an?"เคสที่ยังไม่เสร็จ จากทั้งหมด "+n+" งาน":"ทุกเคสเสร็จแล้ว จากทั้งหมด "+n+" งาน")+"</p>";
+  $("sub").textContent=loadErr?"โหลดไฟล์ data.js ไม่สำเร็จ ตรวจว่าอัปโหลด data.js ไว้โฟลเดอร์เดียวกับ index.html แล้ว":(n?"สรุปงานปี "+(yr||"-")+" · ข้อมูล ณ "+when:"ยังไม่มีข้อมูล");
+  $("attn").innerHTML='<h2 class="sec">ทำเสร็จแล้ว'+(yr?" · ปี "+esc(yr):"")+'</h2><div class="big">'+cnt.Completed+'</div><p class="lead">'+(!n?"ยังไม่มีข้อมูลงาน":"จากทั้งหมด "+n+" งาน"+(pn?" · ยังค้าง "+pn+" งาน":" · ไม่มีงานค้าง"))+"</p>";
   $("stat").innerHTML='<h2 class="sec">Status</h2><div class="statbody"><div class="ringwrap">'+ring(cnt,n)+'<div class="ringc"><b>'+dp+'%</b><span>เสร็จแล้ว</span></div></div><ul class="srows">'
    +STAT.map(function(s){return'<li class="srow'+(cnt[s]?"":" zero")+'" style="--c:'+scol(s)+'"><i class="dot"></i><span class="sn">'+s+'</span><span class="sbar"><i style="width:'+(cnt[s]?Math.max(2,Math.round(cnt[s]*100/n)):0)+'%"></i></span><b class="sc">'+cnt[s]+'</b><span class="sp">'+(n?Math.round(cnt[s]*100/n):0)+"%</span></li>"}).join("")
    +(other>0?'<li class="srow" style="--c:var(--mute)"><i class="dot"></i><span class="sn">อื่น ๆ</span><span class="sbar"><i style="width:'+Math.max(2,Math.round(other*100/n))+'%"></i></span><b class="sc">'+other+'</b><span class="sp">'+Math.round(other*100/n)+"%</span></li>":"")+"</ul></div>";
-  var dn=n-an;
-  $("list").innerHTML=(an?act.map(rowHtml).join(""):'<div class="none"><b>'+(n?"ไม่มีเคสที่ค้างอยู่":"ยังไม่มีข้อมูล")+"</b>"+(n?"ทุกงานเสร็จแล้ว":"กด “นำเข้า CSV” หรืออัปโหลด data.js")+"</div>")
-   +(dn?'<p class="hint">งานที่เสร็จแล้ว '+dn+" งาน ไม่แสดงในรายการนี้ · กดช่องในกราฟ Month เพื่อดูรายละเอียด</p>":"");
   var by={};T.forEach(function(t){if(t.month)(by[t.month]=by[t.month]||[]).push(t)});
   var mk=Object.keys(by).sort(MC);
   $("months").innerHTML=mk.length?mk.map(function(k){
     var arr=by[k].slice().sort(function(a,b){return(b.status==="Completed")-(a.status==="Completed")||so(a.status)-so(b.status)});
-    return'<div class="mcol"><span class="mnum">'+arr.length+'</span><div class="stack">'+arr.map(function(t){var d=t.status==="Completed";return'<button class="seg '+(d?"dn":"on")+'" style="--c:'+scol(t.status)+'" data-id="'+esc(t.id)+'" title="'+esc(t.no)+" · "+esc(t.status)+'" aria-label="'+esc(t.no)+" "+esc(t.status)+'"></button>'}).join("")+'</div><span class="mlab">'+esc(k.slice(0,3))+"</span></div>"}).join(""):'<span class="mute">เดือนจะแสดงเมื่อมีข้อมูลระบุเดือน (ชื่อไฟล์ CSV ต้องมีเดือน เช่น Jan-2026)</span>';
+    return'<div class="mcol"><span class="mnum">'+arr.length+'</span><div class="stack">'+arr.map(function(t){var d=t.status==="Completed";return'<i class="seg '+(d?"dn":"on")+'" style="--c:'+scol(t.status)+'"></i>'}).join("")+'</div><span class="mlab">'+esc(k.slice(0,3))+"</span></div>"}).join(""):'<span class="mute">ยังไม่มีข้อมูลรายเดือน</span>';
   $("mkey").textContent=mk.length?"1 ช่อง = 1 งาน · สีสว่างคือเคสที่ยังไม่เสร็จ · สีจางคือเสร็จแล้ว":"";
   var bt=tally("brand"),bk=Object.keys(bt).sort(function(a,b){return bt[b]-bt[a]}),bm=bk.length?bt[bk[0]]:1;
   $("brands").innerHTML=bk.length?bk.map(function(k){return'<div class="vrow" style="--vc:'+vcol(k)+'"><span class="vname">'+esc(k)+'</span><span class="vtrack"><i style="width:'+Math.max(2,Math.round(bt[k]*100/bm))+'%"></i></span><b class="vnum">'+bt[k]+"</b></div>"}).join(""):'<span class="mute">ยังไม่มีข้อมูล</span>';
 }
-function openDetail(id){
-  var t=T.filter(function(x){return x.id===id})[0];if(!t)return;
-  $("dt").textContent=t.no;
-  $("detail").innerHTML=FIELDS.map(function(f){return'<div'+((f[0]==="desc"||f[0]==="events")?' class="full"':"")+"><dt>"+f[1]+"</dt><dd>"+(esc(t[f[0]])||"-")+"</dd></div>"}).join("");
-  document.body.classList.add("open");$("drawer").setAttribute("aria-hidden","false");$("cancel").focus();
-}
-function closeDetail(){document.body.classList.remove("open");$("drawer").setAttribute("aria-hidden","true")}
-function parseCSV(s){
-  var r=[],row=[],c="",q=false,i,ch;s=s.replace(/^﻿/,"");
-  for(i=0;i<s.length;i++){ch=s[i];
-    if(q){if(ch==='"'){if(s[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
-    else if(ch==='"')q=true;
-    else if(ch===","){row.push(c);c=""}
-    else if(ch==="\n"||ch==="\r"){if(ch==="\r"&&s[i+1]==="\n")i++;row.push(c);r.push(row);row=[];c=""}
-    else c+=ch}
-  if(c||row.length){row.push(c);r.push(row)}
-  return r;
-}
-function monthOf(name){var m=/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*[^a-z0-9]*(\d{4})/i.exec(name);return m?m[1][0].toUpperCase()+m[1].slice(1).toLowerCase()+"-"+m[2]:""}
-function readFile(f){return new Promise(function(res){var r=new FileReader();r.onload=function(){res({name:f.name,text:String(r.result)})};r.onerror=function(){res({name:f.name,text:""})};r.readAsText(f)})}
-function importFiles(files){
-  Promise.all(files.map(readFile)).then(function(list){
-    var byNo={},added=0,changed=0,bad=[],base=Date.now();
-    T.forEach(function(t){byNo[t.no]=t});
-    list.forEach(function(x,fi){
-      var rows=parseCSV(x.text);if(rows.length<2){bad.push(x.name);return}
-      var map=rows[0].map(function(h){return H[h.trim().toLowerCase()]||null});
-      if(map.indexOf("no")<0){bad.push(x.name);return}
-      var mo=monthOf(x.name);
-      rows.slice(1).forEach(function(r,i){
-        var o={};map.forEach(function(k,j){if(k)o[k]=(r[j]||"").trim()});
-        if(!o.no)return;if(!o.month&&mo)o.month=mo;
-        var ex=byNo[o.no];
-        if(ex){Object.keys(o).forEach(function(k){ex[k]=o[k]});changed++}
-        else{o.id="t"+base.toString(36)+fi+"x"+i+Math.random().toString(36).slice(2,5);o.created=base+fi*100000-i;byNo[o.no]=o;T.push(o);added++}
-      });
-    });
-    if(added||changed){updated=Date.now();save();render()}
-    alert("นำเข้างานใหม่ "+added+" งาน อัปเดตงานเดิม "+changed+" งาน (เห็นเฉพาะในเครื่องนี้)"+(bad.length?"\nอ่านไม่ได้ (ไม่พบคอลัมน์ Ticket No): "+bad.join(", "):""));
-  });
-}
-$("list").addEventListener("click",function(e){var b=e.target.closest(".row");if(b)openDetail(b.dataset.id)});
-$("months").addEventListener("click",function(e){var b=e.target.closest(".seg");if(b)openDetail(b.dataset.id)});
-$("cancel").addEventListener("click",closeDetail);$("veil").addEventListener("click",closeDetail);
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeDetail()});
 function boot(d,err){DATA=d||null;loadErr=!!err;load();render()}
 var sc=document.createElement("script");sc.src="data.js?_="+Date.now();
 sc.onload=function(){window.JOB_DATA&&window.JOB_DATA.tickets?boot(window.JOB_DATA,false):boot(null,true)};
